@@ -43,6 +43,17 @@ function Todos() {
 
   const itemsLeft = todos.filter((todo) => !todo.completed).length
   const hasCompleted = todos.some((todo) => todo.completed)
+  const allCompleted =
+    todos.length > 0 && todos.every((todo) => todo.completed)
+
+  function handleToggleAll() {
+    setTodos(
+      todos.map((todo) => ({
+        ...todo,
+        completed: !allCompleted,
+      }))
+    )
+  }
 
   return (
     <section className="mx-auto max-w-[550px]">
@@ -66,6 +77,8 @@ function Todos() {
               <input
                 id="toggle-all"
                 type="checkbox"
+                checked={allCompleted}
+                onChange={handleToggleAll}
                 className="peer sr-only"
               />
 
